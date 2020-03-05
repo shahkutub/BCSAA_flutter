@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:oktoast/oktoast.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:connectivity/connectivity.dart';
 import 'dart:io';
 import 'package:wasa_inventory/pages/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,10 +37,10 @@ class LoginResponse {
 
    Authentication_info authentication_info = new Authentication_info();
 
-   Logged_session_data logged_session_data = new Logged_session_data();
+  // Logged_session_data logged_session_data = new Logged_session_data();
 
 
-   LoginResponse({this.errormsg, this.successmsg, this.authentication_access,this.authentication_info,this.logged_session_data});
+   LoginResponse({this.errormsg, this.successmsg, this.authentication_access,this.authentication_info});
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(
@@ -50,7 +48,7 @@ class LoginResponse {
       successmsg: json['successmsg'],
       authentication_access: json['authentication_access'],
       authentication_info:Authentication_info.fromJson(json['authentication_info']),
-        logged_session_data:Logged_session_data.fromJson(json['logged_session_data'])
+       // logged_session_data:Logged_session_data.fromJson(json['logged_session_data'])
     );
   }
 }
@@ -58,8 +56,8 @@ class LoginResponse {
  class Logged_session_data {
 
 
-
-  String id,salutation,name,email,usertype,role,status,provider,provider_key,store_username,store_password,library_username,
+  int id;
+  String salutation,name,email,usertype,role,status,provider,provider_key,store_username,store_password,library_username,
       library_password,library_staff_username,library_staff_password;
 
 
@@ -93,7 +91,8 @@ class LoginResponse {
 
 
 class Authentication_info {
-  String email,password,oldauthenticate_code;
+  String email,password;
+  int oldauthenticate_code;
 
    Authentication_info({this.email, this.password, this.oldauthenticate_code});
 
@@ -109,16 +108,16 @@ class Authentication_info {
 
 
 
- bool connectivity(){
-   var connectivityResult =  (new Connectivity().checkConnectivity());
-   if (connectivityResult == ConnectivityResult.mobile) {
-     return true;
-   } else if (connectivityResult == ConnectivityResult.wifi) {
-     return true;
-   }else{
-     return false;
-   }
- }
+// bool connectivity(){
+//   var connectivityResult =  (new Connectivity().checkConnectivity());
+//   if (connectivityResult == ConnectivityResult.mobile) {
+//     return true;
+//   } else if (connectivityResult == ConnectivityResult.wifi) {
+//     return true;
+//   }else{
+//     return false;
+//   }
+// }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -162,6 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             new Image.asset('images/bcs.png', scale: 1.0, width: 200.0, height: 200.0),
             new ListTile(
+
               leading: const Icon(Icons.person),
               title: new TextFormField(
 
@@ -180,12 +180,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   hintText: "Email",
                 ),
 
+
               ),
             ),
 
             new ListTile(
               leading: const Icon(Icons.enhanced_encryption),
               title: new TextFormField(
+
 
                 //validator: validatePassWord,
                 onSaved: (String val) {
@@ -200,6 +202,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 decoration: new InputDecoration(
                   hintText: "Password",
+
 
                 ),
               ),
@@ -219,8 +222,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 //onPressed: _sendToServer,
                 child: setUpButtonChild(),
                 onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePageDrawerParticipant()));
-                 // _sendToServer();
+                  //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePageDrawerParticipant()));
+                  _sendToServer();
                 },
 
 //            onPressed: () {
@@ -311,16 +314,60 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
 
-    http.Response response = await http.post("http://123.49.41.11/api/login", body: {'email': email, 'password': pass}); // post api call
+    http.Response response = await http.post("http://192.168.0.124/bcsaa/api/login", body: {'email': 'moinul35ac@gmai.com', 'password': 'as'}); // post api call
     if (response.statusCode == 200) {
       // If the call to the server was successful, parse the JSON
-     final LoginResponse data = LoginResponse.fromJson(json.decode(response.body));
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
       //_saveValues(data.user);
      setState(() {
        _state = 2;
+       prefs.setString('username', 'moinul35ac@gmai.com');
+
+       print("MSG"+prefs.getString('username'));
       // _onChanged(true,data.user.full_name,data.user.warehouse_name,data.user.warehouse_id);
      });
 
+     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePageDrawerParticipant()));
+
+     final LoginResponse data = LoginResponse.fromJson(json.decode(response.body));
+
+
+
+     if(data.authentication_access.compareTo('yes') != null){
+
+       return showDialog(
+         context: context,
+         builder: (context) {
+           return AlertDialog(
+             title: Text('Enter current team'),
+             content: new Row(
+               children: <Widget>[
+                 new Expanded(
+                     child: new TextField(
+                       autofocus: true,
+                       decoration: new InputDecoration(
+                           labelText: 'Team Name', hintText: 'eg. Juventus F.C.'),
+                       onChanged: (value) {
+                         //teamName = value;
+                       },
+                     ))
+               ],
+             ),
+             actions: <Widget>[
+               FlatButton(
+                 child: Text('Ok'),
+                 onPressed: () {
+                   //Navigator.of(context).pop(teamName);
+                 },
+               ),
+             ],
+           );
+         },
+       );
+
+
+     }
 
 
 //     SharedPreferencesTest.setString(Appconstant.name,data.user.full_name);
@@ -337,7 +384,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //                },
 //              );
 
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePageDrawerParticipant()));
+
 //      Navigator.push(
 //        context,
 //        MaterialPageRoute(builder: (context) => HomePage()),
@@ -372,7 +419,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void toast_show() {
-    showToast("content");
+    //showToast("content");
   }
 
 //  void _showToast(BuildContext context) {
@@ -484,7 +531,16 @@ class _MyHomePageState extends State<MyHomePage> {
 //    phoneController.text = prefs.getString("phone");
   }
 
+  addLogSessionToSF(String data) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('logsession', data.toString());
+  }
 
+ getLogSessionSF () async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String stringValue = prefs.getString('logsession');
+    return stringValue;
+  }
 
 
   saveUserData(String name,String warehouse) async {

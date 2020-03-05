@@ -1,54 +1,42 @@
 import 'package:shared_preferences/shared_preferences.dart';
 class SharedPreferencesTest {
-  ///
-  /// Instantiation of the SharedPreferences library
-  ///
-  final String _kNotificationsPrefs = "allowNotifications";
-  final String _kSortingOrderPrefs = "sortOrder";
 
-  /// ------------------------------------------------------------
-  /// Method that returns the user decision to allow notifications
-  /// ------------------------------------------------------------
-  Future<bool> getAllowsNotifications() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    return prefs.getBool(_kNotificationsPrefs) ?? false;
+  addStringUserNameSF(String data) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('username', "data");
   }
 
-  /// ----------------------------------------------------------
-  /// Method that saves the user decision to allow notifications
-  /// ----------------------------------------------------------
-  Future<bool> setAllowsNotifications(bool value) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    return prefs.setBool(_kNotificationsPrefs, value);
+  addIntToSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('intValue', 123);
   }
 
-  /// ------------------------------------------------------------
-  /// Method that returns the user decision on sorting order
-  /// ------------------------------------------------------------
-
-
-//  static  Future<String> getString(String key) async {
-//    final SharedPreferences prefs = await SharedPreferences.getInstance();
-//
-//    return prefs.getString(key) ?? 'name';
-//  }
-
-  static  Future<String> getString(String key) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(key) ?? 'name';
+  addDoubleToSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setDouble('doubleValue', 115.0);
   }
 
-  /// ----------------------------------------------------------
-  /// Method that saves the user decision on sorting order
-  /// ----------------------------------------------------------
- static Future<bool>  setString(String key,String value) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    return prefs.setString(key, value);
+  getValuesSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String stringValue = prefs.getString('username');
+    //Return bool
+    bool boolValue = prefs.getBool('boolValue');
+    //Return int
+    int intValue = prefs.getInt('intValue');
+    //Return double
+    double doubleValue = prefs.getDouble('doubleValue');
   }
 
+  getUserNameSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String stringValue = prefs.getString('username');
+
+  }
 
 
 }

@@ -2,8 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 String _email='';
 class Next extends StatefulWidget {
+
+  _NextState __nextState = _NextState();
+
   @override
-  _NextState createState() => _NextState();
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return __nextState;
+  }
+
+
+//  @override
+//  _NextState createState() => _NextState();
+
+
 }
 
 class _NextState extends State<Next> {
@@ -16,7 +28,13 @@ class _NextState extends State<Next> {
   _loadCounter() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      _email = (prefs.getString('email')??'');
+
+      // read
+      //final myString = prefs.getString('my_string_key') ?? '';
+// write
+    //  prefs.setString('email', 'test@mail.com');
+
+      _email = (prefs.getString('username')??'');
     });
   }
   @override

@@ -1,17 +1,18 @@
 
+import 'package:wasa_inventory/utils/test2.dart';
 import 'package:flutter/material.dart';
 import 'package:wasa_inventory/fragments/bidirectionalscroll.dart';
 import 'package:wasa_inventory/fragments/dashboard_fragment.dart';
 import 'package:wasa_inventory/fragments/fargment_home_page.dart';
 import 'package:wasa_inventory/fragments/first_fragment.dart';
 import 'package:wasa_inventory/fragments/home_fragment.dart';
-import 'package:wasa_inventory/fragments/piechart.dart';
 import 'package:wasa_inventory/fragments/requisition_issue.dart';
 import 'package:wasa_inventory/fragments/second_fragment.dart';
 import 'package:wasa_inventory/fragments/test.dart';
-import 'package:wasa_inventory/fragments/third_fragment.dart';
+import 'package:wasa_inventory/fragments/SearchList.dart';
 import 'package:wasa_inventory/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider/path_provider.dart';
 
 class DrawerItem {
   String title;
@@ -28,15 +29,15 @@ class DrawerItem {
 
 
 
-class HomePageDrawerParticipant extends StatefulWidget {
-  final drawerItems = [
-    new DrawerItem("Class Routine", Icons.dehaze),
-    new DrawerItem("Class Content by CMT", Icons.dehaze),
-    new DrawerItem("Weekly Atttendance Plan", Icons.dehaze),
-    new DrawerItem("Exam Routine", Icons.dehaze),
-    new DrawerItem("Speaker Evaluation", Icons.dehaze),
+    class HomePageDrawerParticipant extends StatefulWidget {
+      final drawerItems = [
+        new DrawerItem("Class Routine", Icons.dehaze),
+        new DrawerItem("Class Content by CMT", Icons.dehaze),
+        new DrawerItem("Weekly Atttendance Plan", Icons.dehaze),
+        new DrawerItem("Exam Routine", Icons.dehaze),
+        new DrawerItem("Speaker Evaluation", Icons.dehaze),
 
-  ];
+      ];
 
 
 
@@ -82,9 +83,7 @@ class HomePageDrawerParticipantState extends State<HomePageDrawerParticipant> {
 
 
 
-
   int _selectedDrawerIndex = 0;
-
 
 
   _getDrawerItemWidget(int pos) {
@@ -92,21 +91,21 @@ class HomePageDrawerParticipantState extends State<HomePageDrawerParticipant> {
       case 0:
         return new Fragment_home_page();
       case 1:
-        return new Requisition_issue();
+        return new SearchList();
       case 2:
         return new Bidirectional();
       case 3:
-        return new ThirdFragment();
+        return new Next();
       case 4:
-        return new ThirdFragment();
+        return new SearchList();
       case 5:
-        return new ThirdFragment();
+        return new SearchList();
       case 6:
-        return new ThirdFragment();
+        return new SearchList();
       case 7:
-        return new ThirdFragment();
+        return new SearchList();
       case 8:
-        return new ThirdFragment();
+        return new SearchList();
 
       default:
         return new Text("Error");

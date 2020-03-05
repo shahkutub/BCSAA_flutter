@@ -319,13 +319,17 @@ class Fragment_home_page_state extends State<Fragment_home_page>{
 
                     ),
 
-                    new Container(
-                      height: 210.0,
+                  //  new BidirectionalScrollViewPlugin(child: new MyList(),)
+                   // new Expanded(
+                      new Container(
+                        height: 200.0,
                       decoration: new BoxDecoration(
                           color: Colors.black38
                       ),
                       child: new MyList(),
-                    ),
+                      ),
+
+                    //),
 
                   ],
                 ),
@@ -410,14 +414,18 @@ class Fragment_home_page_state extends State<Fragment_home_page>{
 //              listTitle.add(dataMode6);
 //              listTitle.add(dataMode3);
 
+              var pos = 1;
               for (var i = 0; i < 10; i++) {
-                if(i==0){
-                  DataModel dataModel = new DataModel('name', 'username', 'id', 'email', 'mobile');
-                  listTitle.add(dataModel);
-                }else{
-                  DataModel dataMode2 = new DataModel('sadi2', 'shah2', '1', 'sadi@mail.com', '01723335972');
+               // if(i==0){
+//                  DataModel dataModel = new DataModel('name', 'username', 'id', 'email', 'mobile');
+//                  listTitle.add(dataModel);
+              pos+=i;
+                //}else{
+                  DataModel dataMode2 = new DataModel("Sadi$pos", 'shah$pos', '1', 'sadi@mail.com', '01723335972');
                   listTitle.add(dataMode2);
-                }
+
+              pos-=i;
+                //}
               }
 
 
@@ -432,65 +440,192 @@ class Fragment_home_page_state extends State<Fragment_home_page>{
     return new Scaffold(
       body: new SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: new SizedBox(
-          width: 1500.0,
-          child: new ListView.builder(
-            itemCount: listTitle.length,
-            itemBuilder: (BuildContext context, int i) {
-              //log('ipos: $i');
-              //debugPrint('ipos: $i');
-              listRow.clear();
 
-              listRow.add(listTitle.elementAt(i).name);
-              listRow.add(listTitle.elementAt(i).email);
-              listRow.add(listTitle.elementAt(i).mobile);
-              listRow.add(listTitle.elementAt(i).userid);
-              listRow.add(listTitle.elementAt(i).username);
+          child: new Column(
 
-
-
-              return new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: new List.generate(listRow.length, (int j) {
-                  //log('j pos: $j');
-                  //debugPrint('jpos: $j');
-
-                  if(i==0){
-                    return new Container(
-                        decoration: BoxDecoration(
-                          color: const Color(0xff5A6268),
-                          image: DecorationImage(
-                            image: ExactAssetImage('images/flowers.jpeg'),
-                            fit: BoxFit.cover,
-                          ),
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 2.0,
-                          ),
-                        ),
-                        width: 300.0,
-                        child: new Text(
-                            listRow.elementAt(j),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.amberAccent,
-                                fontSize: 30
-                            )
-                        )
-                    );
-
-                  }else{
-                    return new Container(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Container(
                       decoration: BoxDecoration(
-                        color: const Color(0xff7c94b6),
-
+                        color: const Color(0xff5A6268),
+//                          image: DecorationImage(
+//                            image: ExactAssetImage('images/flowers.jpeg'),
+//                            fit: BoxFit.cover,
+//                          ),
                         border: Border.all(
                           color: Colors.white,
                           width: 2.0,
                         ),
                       ),
-
                       width: 300.0,
+                      child: new Text(
+                          "Name",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.amberAccent,
+                              fontSize: 30
+                          )
+                      )
+                  ),
+
+                  Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xff5A6268),
+//                          image: DecorationImage(
+//                            image: ExactAssetImage('images/flowers.jpeg'),
+//                            fit: BoxFit.cover,
+//                          ),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 2.0,
+                        ),
+                      ),
+                      width: 300.0,
+                      child: new Text(
+                          "username",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.amberAccent,
+                              fontSize: 30
+                          )
+                      )
+                  ),
+
+                  Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xff5A6268),
+//                          image: DecorationImage(
+//                            image: ExactAssetImage('images/flowers.jpeg'),
+//                            fit: BoxFit.cover,
+//                          ),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 2.0,
+                        ),
+                      ),
+                      width: 300.0,
+                      child: new Text(
+                          "id",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.amberAccent,
+                              fontSize: 30
+                          )
+                      )
+                  ),
+
+                  Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xff5A6268),
+//                          image: DecorationImage(
+//                            image: ExactAssetImage('images/flowers.jpeg'),
+//                            fit: BoxFit.cover,
+//                          ),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 2.0,
+                        ),
+                      ),
+                      width: 300.0,
+                      child: new Text(
+                          "email",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.amberAccent,
+                              fontSize: 30
+                          )
+                      )
+                  ),
+
+                  Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xff5A6268),
+//                          image: DecorationImage(
+//                            image: ExactAssetImage('images/flowers.jpeg'),
+//                            fit: BoxFit.cover,
+//                          ),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 2.0,
+                        ),
+                      ),
+                      width: 300.0,
+                      child: new Text(
+                          "Mobile",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.amberAccent,
+                              fontSize: 30
+                          )
+                      )
+                  ),
+                ],
+              ),
+            Row(
+              children: <Widget>[
+                SizedBox(
+                width: 1500.0,
+                height: 160.0,
+
+                child: ListView.builder(
+
+                  itemCount: listTitle.length,
+                  itemBuilder: (BuildContext context, int i) {
+                    //log('ipos: $i');
+                    //debugPrint('ipos: $i');
+                    listRow.clear();
+
+                    listRow.add(listTitle.elementAt(i).name);
+                    listRow.add(listTitle.elementAt(i).email);
+                    listRow.add(listTitle.elementAt(i).mobile);
+                    listRow.add(listTitle.elementAt(i).userid);
+                    listRow.add(listTitle.elementAt(i).username);
+
+
+
+                    return new Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: new List.generate(listRow.length, (int j) {
+                        //log('j pos: $j');
+                        //debugPrint('jpos: $j');
+
+//                  if(i==0){
+//                    return new Container(
+//                        decoration: BoxDecoration(
+//                          color: const Color(0xff5A6268),
+////                          image: DecorationImage(
+////                            image: ExactAssetImage('images/flowers.jpeg'),
+////                            fit: BoxFit.cover,
+////                          ),
+//                          border: Border.all(
+//                            color: Colors.white,
+//                            width: 2.0,
+//                          ),
+//                        ),
+//                        width: 300.0,
+//                        child: new Text(
+//                            listRow.elementAt(j),
+//                            textAlign: TextAlign.center,
+//                            style: TextStyle(
+//                                color: Colors.amberAccent,
+//                                fontSize: 30
+//                            )
+//                        )
+//                    );
+//
+//                  }else{
+                        return new Container(
+                          decoration: BoxDecoration(
+                            color: const Color(0xff7c94b6),
+
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 2.0,
+                            ),
+                          ),
+
+                          width: 300.0,
                           child: new Text(
                               listRow.elementAt(j),
                               textAlign: TextAlign.center,
@@ -519,13 +654,239 @@ class Fragment_home_page_state extends State<Fragment_home_page>{
 //                        }).toList(),
 //                      ),
 
+                        );
+                        // }
+                      }),
                     );
-                  }
-                }),
-              );
-            },
+                  },
+
+
+                ),
+              )
+//              Row(
+//
+//                children: <Widget>[
+//
+//                  Container(
+//                      decoration: BoxDecoration(
+//                        color: const Color(0xff5A6268),
+////                          image: DecorationImage(
+////                            image: ExactAssetImage('images/flowers.jpeg'),
+////                            fit: BoxFit.cover,
+////                          ),
+//                        border: Border.all(
+//                          color: Colors.white,
+//                          width: 2.0,
+//                        ),
+//                      ),
+//                      width: 300.0,
+//                      child: new Text(
+//                          "Name",
+//                          textAlign: TextAlign.center,
+//                          style: TextStyle(
+//                              color: Colors.amberAccent,
+//                              fontSize: 30
+//                          )
+//                      )
+//                  ),
+//
+//                  Container(
+//                      decoration: BoxDecoration(
+//                        color: const Color(0xff5A6268),
+////                          image: DecorationImage(
+////                            image: ExactAssetImage('images/flowers.jpeg'),
+////                            fit: BoxFit.cover,
+////                          ),
+//                        border: Border.all(
+//                          color: Colors.white,
+//                          width: 2.0,
+//                        ),
+//                      ),
+//                      width: 300.0,
+//                      child: new Text(
+//                          "username",
+//                          textAlign: TextAlign.center,
+//                          style: TextStyle(
+//                              color: Colors.amberAccent,
+//                              fontSize: 30
+//                          )
+//                      )
+//                  ),
+//
+//                  Container(
+//                      decoration: BoxDecoration(
+//                        color: const Color(0xff5A6268),
+////                          image: DecorationImage(
+////                            image: ExactAssetImage('images/flowers.jpeg'),
+////                            fit: BoxFit.cover,
+////                          ),
+//                        border: Border.all(
+//                          color: Colors.white,
+//                          width: 2.0,
+//                        ),
+//                      ),
+//                      width: 300.0,
+//                      child: new Text(
+//                          "id",
+//                          textAlign: TextAlign.center,
+//                          style: TextStyle(
+//                              color: Colors.amberAccent,
+//                              fontSize: 30
+//                          )
+//                      )
+//                  ),
+//
+//                  Container(
+//                      decoration: BoxDecoration(
+//                        color: const Color(0xff5A6268),
+////                          image: DecorationImage(
+////                            image: ExactAssetImage('images/flowers.jpeg'),
+////                            fit: BoxFit.cover,
+////                          ),
+//                        border: Border.all(
+//                          color: Colors.white,
+//                          width: 2.0,
+//                        ),
+//                      ),
+//                      width: 300.0,
+//                      child: new Text(
+//                          "email",
+//                          textAlign: TextAlign.center,
+//                          style: TextStyle(
+//                              color: Colors.amberAccent,
+//                              fontSize: 30
+//                          )
+//                      )
+//                  ),
+//
+//                  Container(
+//                      decoration: BoxDecoration(
+//                        color: const Color(0xff5A6268),
+////                          image: DecorationImage(
+////                            image: ExactAssetImage('images/flowers.jpeg'),
+////                            fit: BoxFit.cover,
+////                          ),
+//                        border: Border.all(
+//                          color: Colors.white,
+//                          width: 2.0,
+//                        ),
+//                      ),
+//                      width: 300.0,
+//                      child: new Text(
+//                          "Mobile",
+//                          textAlign: TextAlign.center,
+//                          style: TextStyle(
+//                              color: Colors.amberAccent,
+//                              fontSize: 30
+//                          )
+//                      )
+//                  ),
+//                ],
+//              ),
+              ],
+            )
+
+
+
+            ],
+
           ),
-        ),
+
+
+//        child: new SizedBox(
+//          width: 1500.0,
+//          child: new ListView.builder(
+//            itemCount: listTitle.length,
+//            itemBuilder: (BuildContext context, int i) {
+//              //log('ipos: $i');
+//              //debugPrint('ipos: $i');
+//              listRow.clear();
+//
+//              listRow.add(listTitle.elementAt(i).name);
+//              listRow.add(listTitle.elementAt(i).email);
+//              listRow.add(listTitle.elementAt(i).mobile);
+//              listRow.add(listTitle.elementAt(i).userid);
+//              listRow.add(listTitle.elementAt(i).username);
+//
+//
+//
+//              return new Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                children: new List.generate(listRow.length, (int j) {
+//                  //log('j pos: $j');
+//                  //debugPrint('jpos: $j');
+//
+////                  if(i==0){
+////                    return new Container(
+////                        decoration: BoxDecoration(
+////                          color: const Color(0xff5A6268),
+//////                          image: DecorationImage(
+//////                            image: ExactAssetImage('images/flowers.jpeg'),
+//////                            fit: BoxFit.cover,
+//////                          ),
+////                          border: Border.all(
+////                            color: Colors.white,
+////                            width: 2.0,
+////                          ),
+////                        ),
+////                        width: 300.0,
+////                        child: new Text(
+////                            listRow.elementAt(j),
+////                            textAlign: TextAlign.center,
+////                            style: TextStyle(
+////                                color: Colors.amberAccent,
+////                                fontSize: 30
+////                            )
+////                        )
+////                    );
+////
+////                  }else{
+//                    return new Container(
+//                      decoration: BoxDecoration(
+//                        color: const Color(0xff7c94b6),
+//
+//                        border: Border.all(
+//                          color: Colors.white,
+//                          width: 2.0,
+//                        ),
+//                      ),
+//
+//                      width: 300.0,
+//                          child: new Text(
+//                              listRow.elementAt(j),
+//                              textAlign: TextAlign.center,
+//                              style: TextStyle(
+//                                  color: Colors.red,
+//                                  fontSize: 25
+//                              )
+//                          ),
+//
+////                      child: new DropdownButton<User>(
+////                        hint: new Text("Select a user"),
+////                        value: selectedUser,
+////                        onChanged: (User newValue) {
+////                          setState(() {
+////                            selectedUser = newValue;
+////                          });
+////                        },
+////                        items: users.map((User user) {
+////                          return new DropdownMenuItem<User>(
+////                            value: user,
+////                            child: new Text(
+////                              user.name,
+////                              style: new TextStyle(color: Colors.black),
+////                            ),
+////                          );
+////                        }).toList(),
+////                      ),
+//
+//                    );
+//                 // }
+//                }),
+//              );
+//            },
+//          ),
+//        ),
       ),
     );
   }
